@@ -32,5 +32,29 @@ export async function GET(request: NextRequest) {
         return NextResponse.redirect(new URL("/?error=invalid_token", request.url));
     }
 
-    const userResponse =
+    const userResponse = await fetch("https://api.github.com/users", {
+        headers: {
+            Authorization: `Bearer ${tokenData.access_token}`,
+            Accept: "application/vnd.github+json",
+        },
+    });
+
+    const userData = await userResponse.json();
+    const response = NextResponse.redirect(new URL("/profile", request.url));
+
+    response.cookies.delete("oauth_state");
+
+    response.cookies.set("github_user", JSON.stringify({
+        name: userData.name,
+        login: userData.login,
+        avatar_url: userData.avatar_url,
+    }), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 3600,
+    });
+
+    return response;
 }
