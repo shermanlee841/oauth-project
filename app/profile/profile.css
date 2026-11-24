@@ -37,3 +37,17 @@
     color: #16a34a;
     margin-top: 16px;
 }
+
+.logout-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #24292f;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.logout-button:hover {
+    background-color: #444c56;
+}

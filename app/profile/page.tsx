@@ -30,6 +30,7 @@ export default async function ProfilePage() {
                 <p className = "profile-success">
                     Successfully authenticated with Github.
                 </p>
+                <a href = "/api/auth/logout" className = "logout-button">Logout</a>
             </div>
         </main>
     );
