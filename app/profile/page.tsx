@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import "./profile.css";
+export const instant = false;
 
 export default async function ProfilePage() {
     const cookieStore = await cookies();
