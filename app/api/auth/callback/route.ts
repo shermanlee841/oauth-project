@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.redirect(new URL("/?error=invalid_token", request.url));
     }
 
-    const userResponse = await fetch("https://api.github.com/users", {
+    const userResponse = await fetch("https://api.github.com/user", {
         headers: {
             Authorization: `Bearer ${tokenData.access_token}`,
             Accept: "application/vnd.github+json",
@@ -40,6 +40,7 @@ export async function GET(request: NextRequest) {
     });
 
     const userData = await userResponse.json();
+    console.log("GitHub user data:", userData);
     const response = NextResponse.redirect(new URL("/profile", request.url));
 
     response.cookies.delete("oauth_state");
