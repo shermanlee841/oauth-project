@@ -40,7 +40,6 @@ export async function GET(request: NextRequest) {
     });
 
     const userData = await userResponse.json();
-    console.log("GitHub user data:", userData);
     const response = NextResponse.redirect(new URL("/profile", request.url));
 
     response.cookies.delete("oauth_state");
